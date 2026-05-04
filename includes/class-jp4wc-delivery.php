@@ -44,9 +44,11 @@ class JP4WC_Delivery {
 		add_action( 'woocommerce_order_details_after_order_table', array( $this, 'frontend_order_timedate' ) );
 		// Show on order detail email (frontend).
 		add_filter( 'woocommerce_email_order_meta', array( $this, 'email_order_delivery_details' ), 10, 3 );
-		// Shop Order functions.
+		// Shop Order functions — legacy post list and HPOS order list.
 		add_filter( 'manage_edit-shop_order_columns', array( $this, 'shop_order_columns' ) );
 		add_action( 'manage_shop_order_posts_custom_column', array( $this, 'render_shop_order_columns' ), 2 );
+		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'shop_order_columns' ) );
+		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'render_hpos_shop_order_columns' ), 2, 2 );
 		// display in Order meta box ship date and time (admin).
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 		add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_meta_box' ), 0, 1 );
@@ -767,6 +769,18 @@ class JP4WC_Delivery {
 				break;
 		}
 	}
+	/**
+	 * Admin: Output delivery column on HPOS order list.
+	 *
+	 * @param string   $column Column ID.
+	 * @param WC_Order $order  Order object passed by HPOS action.
+	 */
+	public function render_hpos_shop_order_columns( $column, $order ) {
+		if ( 'wc4jp_delivery' === $column ) {
+			$this->display_date_and_time_zone( $order );
+		}
+	}
+
 	/**
 	 * Admin: Display date and timeslot on the admin order page
 	 *
