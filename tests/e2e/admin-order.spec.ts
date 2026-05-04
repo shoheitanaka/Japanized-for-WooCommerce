@@ -142,7 +142,7 @@ test( 'admin order list shows the delivery date column', async ( { page } ) => {
 
 	// The delivery column header should be present (column key = wc4jp_delivery, label = "Delivery").
 	await expect(
-		page.locator( 'th:has-text("Delivery"), th:has-text("配送"), .column-wc4jp_delivery' ).first(),
+		page.locator( 'th:has-text("Delivery"), .column-wc4jp_delivery' ).first(),
 	).toBeVisible( { timeout: 10_000 } );
 } );
 

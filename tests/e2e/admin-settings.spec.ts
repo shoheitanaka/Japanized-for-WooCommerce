@@ -75,7 +75,7 @@ test( 'enabling yomigana in admin persists after page reload', async ( { page, r
 	}
 
 	// Save the settings via the footer save button.
-	await page.locator( '.jp4wc-settings-footer button, button:has-text("Save Settings"), button:has-text("保存")' )
+	await page.locator( '.jp4wc-settings-footer button, button:has-text("Save Settings")' )
 		.first()
 		.click();
 	await page.waitForLoadState( 'networkidle' );

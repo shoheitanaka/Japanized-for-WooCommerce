@@ -221,7 +221,7 @@ export async function fillClassicCheckoutBilling(
 ): Promise<void> {
 	await page.fill( '#billing_last_name', opts.lastName ?? '田中' );
 	await page.fill( '#billing_first_name', opts.firstName ?? '正平' );
-	// Select JP prefecture (state). Default: 東京都 = JP13.
+	// Select JP prefecture (state). Default: Tokyo (東京都) = JP13.
 	await page.selectOption( '#billing_state', opts.state ?? 'JP13' ).catch( () => {} );
 	await page.fill( '#billing_postcode', opts.postcode ?? '150-0001' );
 	await page.fill( '#billing_address_1', opts.address ?? '渋谷1-1-1' );
