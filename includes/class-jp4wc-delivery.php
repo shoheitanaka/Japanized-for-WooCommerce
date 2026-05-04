@@ -51,7 +51,7 @@ class JP4WC_Delivery {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 		add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_meta_box' ), 0, 1 );
 
-		add_filter( 'woocommerce_payment_successful_result', array( $this, 'jp4wc_delivery_check_data' ), 10, 1 );
+		add_filter( 'woocommerce_payment_successful_result', array( $this, 'jp4wc_delivery_check_data' ), 10, 2 );
 	}
 
 	/**
@@ -922,12 +922,15 @@ class JP4WC_Delivery {
 	/**
 	 * Check delivery date data after successful payment and send admin notification if required date is missing.
 	 *
-	 * @param array $result Payment successful result.
+	 * @param array $result   Payment successful result.
+	 * @param int   $order_id Order ID passed by WooCommerce as the second filter argument.
 	 * @return array Modified payment result.
 	 */
-	public function jp4wc_delivery_check_data( $result ) {
-		$order_id = $result['order_id'];
-		$order    = wc_get_order( $order_id );
+	public function jp4wc_delivery_check_data( $result, $order_id ) {
+		$order = wc_get_order( $order_id );
+		if ( ! $order ) {
+			return $result;
+		}
 
 		// Check both shortcode and Checkout Block meta keys for delivery date.
 		$date = $order->get_meta( 'wc4jp-delivery-date', true );
