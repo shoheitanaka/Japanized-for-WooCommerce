@@ -151,9 +151,9 @@ test( 'required yomigana shows validation error when submitted empty', async ( {
 
 	// Fill required standard fields but intentionally leave yomigana empty.
 	await page.locator( 'input[id*="last-name"]:not([id*="yomigana"]), input[id*="last_name"]:not([id*="yomigana"]), input[autocomplete*="family-name"]' )
-		.first().fill( '田中' ).catch( () => {} );
+		.first().fill( 'Tanaka' ).catch( () => {} );
 	await page.locator( 'input[id*="first-name"]:not([id*="yomigana"]), input[id*="first_name"]:not([id*="yomigana"]), input[autocomplete*="given-name"]' )
-		.first().fill( '正平' ).catch( () => {} );
+		.first().fill( 'Shohei' ).catch( () => {} );
 	await page.locator( 'input[type="email"], input[autocomplete*="email"]' )
 		.first().fill( 'test@example.com' ).catch( () => {} );
 
@@ -161,7 +161,7 @@ test( 'required yomigana shows validation error when submitted empty', async ( {
 	await page.locator(
 		'button[type="submit"].wc-block-components-checkout-place-order-button, ' +
 		'button.wc-block-checkout__submit-button, ' +
-		'button:has-text("Place Order"), button:has-text("注文する")',
+		'button:has-text("Place Order")',
 	).first().click( { timeout: 15_000 } ).catch( () => {} );
 
 	// Should show error (required yomigana not filled) and stay on checkout.

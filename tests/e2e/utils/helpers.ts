@@ -219,13 +219,13 @@ export async function fillClassicCheckoutBilling(
 		email?: string;
 	} = {},
 ): Promise<void> {
-	await page.fill( '#billing_last_name', opts.lastName ?? '田中' );
-	await page.fill( '#billing_first_name', opts.firstName ?? '正平' );
-	// Select JP prefecture (state). Default: 東京都 = JP13.
+	await page.fill( '#billing_last_name', opts.lastName ?? 'Tanaka' );
+	await page.fill( '#billing_first_name', opts.firstName ?? 'Shohei' );
+	// Select JP prefecture (state). Default: Tokyo = JP13.
 	await page.selectOption( '#billing_state', opts.state ?? 'JP13' ).catch( () => {} );
 	await page.fill( '#billing_postcode', opts.postcode ?? '150-0001' );
-	await page.fill( '#billing_address_1', opts.address ?? '渋谷1-1-1' );
-	await page.fill( '#billing_city', opts.city ?? '渋谷区' );
+	await page.fill( '#billing_address_1', opts.address ?? '1-1-1 Shibuya' );
+	await page.fill( '#billing_city', opts.city ?? 'Shibuya-ku' );
 	await page.fill( '#billing_phone', opts.phone ?? '0312345678' );
 	await page.fill( '#billing_email', opts.email ?? 'test-e2e@example.com' );
 }
