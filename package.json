@@ -10,12 +10,18 @@
 		"npm": "^10.5.0"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.59.1",
+		"@types/node": "^25.6.0",
 		"@woocommerce/dependency-extraction-webpack-plugin": "^3.1.0",
 		"@woocommerce/eslint-plugin": "^2.3.0",
 		"@wordpress/scripts": "^30.19.0",
 		"cross-env": "7.0.3"
 	},
 	"scripts": {
+		"test:e2e": "playwright test",
+		"test:e2e:ui": "playwright test --ui",
+		"test:e2e:debug": "playwright test --debug",
+		"test:e2e:report": "playwright show-report tests/e2e/reports",
 		"start": "wp-scripts start",
 		"build": "wp-scripts build && npm run i18n:build",
 		"i18n": "npm run i18n:build",

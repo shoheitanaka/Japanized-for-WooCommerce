@@ -39,3 +39,9 @@ Thumbs.db
 
 # claude settings
 .claude/settings.local.json
+
+# e2e test artifacts
+tests/e2e/reports/
+tests/e2e/.auth/
+playwright-report/
+test-results/
